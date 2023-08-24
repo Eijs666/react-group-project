@@ -5,19 +5,28 @@ import { fetchLastTenTranslations, handleClearTranslations } from './Api';
 
 function ProfilePage() {
   const [displayTranslations, setDisplayTranslations] = useState([]);
-  const userName = 'YHU';
+  const [localusername, setLocalUsername] = useState("");
+
+  useEffect(() => {
+    const locaStoragelUsername = localStorage.getItem("username");
+    if (locaStoragelUsername) {
+      setLocalUsername(locaStoragelUsername);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      const lastTenTranslations = await fetchLastTenTranslations(userName);
-      setDisplayTranslations(lastTenTranslations);
+      if (localusername) { // Ensure localusername is not empty before making the API call
+        const lastTenTranslations = await fetchLastTenTranslations(localusername);
+        setDisplayTranslations(lastTenTranslations);
+      }
     };
 
     fetchData();
-  }, []);
+  }, [localusername]); // Trigger the effect when localusername changes
 
   const clearTranslations = async () => {
-    const clearedTranslations = await handleClearTranslations(userName);
+    const clearedTranslations = await handleClearTranslations(localusername);
     setDisplayTranslations(clearedTranslations);
   };
 

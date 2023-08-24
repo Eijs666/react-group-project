@@ -8,10 +8,9 @@ const TranslationPage = () => {
   const [inputText, setInputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const [localUsername, setLocalUsername] = useState("");
-  const hardcodedUsername = 'YHU'; 
 
   const handleTranslation = async () => {
-    const translated = await handleTranslate(inputText, hardcodedUsername);
+    const translated = await handleTranslate(inputText, localUsername);
     setTranslatedText(translated);
   };
 

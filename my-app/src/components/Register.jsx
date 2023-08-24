@@ -2,7 +2,6 @@ import './Register.css';
 import React, { useState } from "react";
 import { RegisterUserApi } from './Api';  
 
-// ... rest of the component code
 
 
 function Register() {
