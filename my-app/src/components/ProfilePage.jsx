@@ -1,3 +1,5 @@
+import './ProfilePage.css';
+
 import React, { useState, useEffect } from 'react';
 import { fetchLastTenTranslations, handleClearTranslations } from './Api';
 
