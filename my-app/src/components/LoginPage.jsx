@@ -5,6 +5,10 @@ import Register from './Register';
 import TranlationPage from "./TranslationPage";
 import { useNavigate } from 'react-router-dom';
 import TranslationPage from './TranslationPage';
+import Register from './Register';  
+
+
+
 
 
 function LoginPage() {
