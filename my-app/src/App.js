@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import Register from "./components/Register";
-import TranslationPage from './components/TranslationPage';
+import TranslationPage from "./components/TranslationPage";
 import ProfilePage from './components/ProfilePage';
 
 function App() {
@@ -16,7 +16,6 @@ function App() {
             <li><NavLink to="/translation">Translation</NavLink></li>
             <li><NavLink to="/profile">Profile</NavLink></li>
             <li><NavLink to="/register">Register</NavLink></li>
-
           </ul>
         </nav>
        

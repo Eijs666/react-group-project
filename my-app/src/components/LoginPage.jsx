@@ -2,7 +2,7 @@ import './LoginPage.css';
 import React, { useState } from "react"
 import { GetUserApi } from './Api';
 import Register from './Register';
-import TranlationPage from './TranslationPage';
+import TranlationPage from "./TranslationPage";
 import { useNavigate } from 'react-router-dom';
 import TranslationPage from './TranslationPage';
 
@@ -12,6 +12,7 @@ function LoginPage() {
   const [username, setUsername] = useState(""); //{"Value"} fra slides
   const [password, setPassword] = useState(""); //{"Value"} fra slides
   const [fetchedUsername, setFetchedUsername] = useState(""); // Ny state for fetched brugernavn
+  const [isLoading, setIsLoading] = useState(false); // Ny state for fetched brugernavn
 
   const handleUsernameInput = (event) => {
     setUsername(event.target.value);
@@ -35,8 +36,12 @@ function LoginPage() {
   function handleLogin(event) {
     event.preventDefault(); //Make sure form html does not interrupt api
     
+    setIsLoading(true); //loading true before api call
+
     GetUserApi(username)
       .then(users => {
+        setIsLoading(false); //loading false after api call
+
         console.log(users)
         if (users.length > 0) {
           const user = users[0];
@@ -62,6 +67,7 @@ function LoginPage() {
         }
       })
       .catch(error => {
+        setIsLoading(false); 
         console.log(error);
       });
 
@@ -95,7 +101,14 @@ function LoginPage() {
           <input type="text" placeholder='Password' name="password" className="form-field" value={password} onChange={handlePasswordInput}></input>
         </div>
 
-        <button onClick={handleLogin} className='Button'>Login</button>
+        <button onClick={handleLogin} className='Button'> 
+        {isLoading ? (
+            <div className="lds-dual-ring"></div> // Show spinner when loading
+          ) : (
+            "Login" //Login text
+          )
+        }
+        </button>
       </form>
 
 
