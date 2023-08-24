@@ -1,6 +1,6 @@
 import './Register.css';
 import React, { useState } from "react";
-import { RegisterUserApi } from './Api';  
+import { GetUserApi, RegisterUserApi } from './Api';  
 
 
 
@@ -10,8 +10,42 @@ function Register() {
 
 
   function handleRegisterClick(event){
-    event.preventDefault();
+    event.preventDefault(); 
+    
+    //Check if the user already exists
+    GetUserApi(username)
+    .then(existingUser => {
+      if(existingUser && existingUser.username === username){
+        PopUp("error");
+      } else {
+        // 
+        return RegisterUserApi(username, password);
+      }
+    })
+    .then(newUser => {
+      if(newUser) { //
+        console.log(newUser);
+        PopUp("register");
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      if(error.message === "User already exists"){
+        PopUp("error");
+      } 
+    });
 
+/*
+    GetUserApi(username) 
+    .then(existingUser => {
+      if(existingUser && existingUser.username === username){
+        PopUp("error");
+      } else {
+        // If user doesn't exist, attempt to register them
+        return RegisterUserApi(username, password);
+      }
+    })
+    
     RegisterUserApi(username, password)
     .then(newUser => {
       console.log(newUser);
@@ -26,7 +60,8 @@ function Register() {
         alert("An error occured, Try again")
       }
     })
-    
+    */
+
   };
 
   const PopUp = (messageType) => {

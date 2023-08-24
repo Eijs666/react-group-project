@@ -45,6 +45,10 @@
   text-shadow: 1px 1px black;
 
 }
+button:hover{
+  background-color: green;
+
+}
 
 .lds-dual-ring {
   display: inline-block;
