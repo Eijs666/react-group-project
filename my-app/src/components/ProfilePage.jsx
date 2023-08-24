@@ -2,10 +2,13 @@ import './ProfilePage.css';
 
 import React, { useState, useEffect } from 'react';
 import { fetchLastTenTranslations, handleClearTranslations } from './Api';
+import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
   const [displayTranslations, setDisplayTranslations] = useState([]);
   const userName = 'YHU';
+
+  const nav = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,16 +29,20 @@ function ProfilePage() {
   };
 
   return (
-    <div>
-      <h2>Profile</h2>
-      <h3>Translated Text:</h3>
-      <ul>
+    <div className="profile-container">
+      <h2 id='title'>Profile</h2>
+
+      <hr width="20%" color='black'></hr>
+      <h3>Translated Text</h3>
+      <hr width="20%" color='black'></hr>
+
+      <ul id='translations'>
         {displayTranslations.map((translation, index) => (
           <li key={index}>{translation}</li>
         ))}
       </ul>
-      <button onClick={clearTranslations}>Clear Translations</button>
-      <button onClick={handleLogout}>Logout</button>
+      <button className='button' onClick={clearTranslations}>Clear Translations</button>
+      <button className='button' onClick={() => {nav("/")}}>Logout</button>
     </div>
   );
 }

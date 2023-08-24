@@ -4,6 +4,7 @@ import LoginPage from './components/LoginPage';
 import Register from "./components/Register";
 import TranslationPage from "./components/TranslationPage";
 import ProfilePage from './components/ProfilePage';
+import "./App.css"
 
 function App() {
   return (

@@ -3,6 +3,7 @@ import './TranslationPage.css';
 
 import React, { useState, useEffect } from 'react';
 import { handleTranslate } from './Api'; 
+import { useNavigate } from 'react-router-dom';
 
 const TranslationPage = () => {
   const [inputText, setInputText] = useState('');
@@ -15,7 +16,7 @@ const TranslationPage = () => {
     setTranslatedText(translated);
   };
 
-
+  const nav = useNavigate();
 
   useEffect(() => {
     const locaStoragelUsername = localStorage.getItem("username");
@@ -42,6 +43,7 @@ const TranslationPage = () => {
       />
 
       <button className='button' onClick={handleTranslation}>Translate</button>
+     
       <div>
         <h3>Translated Text in Sign Language:</h3>
         <div className="translated-images">
@@ -54,7 +56,10 @@ const TranslationPage = () => {
           ))}
         </div>
       </div>
+      <button className='button' onClick={() => {nav("/"); }}>Logout</button>
+
     </div>
+    
   );
 };
 

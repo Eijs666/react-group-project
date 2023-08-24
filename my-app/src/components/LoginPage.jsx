@@ -55,7 +55,6 @@ function LoginPage() {
            // GoToRegister("/translation");
             console.log(GoToRegister("/translation"));
             console.log({username} + " logged in🎉")
-            alert("🎉You are logged in!🎉");
             nav("/translation"); //Go to translation page
             
             //Redirect to Translation page
