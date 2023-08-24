@@ -1,0 +1,58 @@
+
+#title{
+  
+  background: #BDFF68;
+  border-radius: 10px;
+}
+
+.translate-container{
+  font-size: 24px;
+  text-align: center;
+  background-color: #575757;
+  border-radius: 20px;
+  color: white;
+  text-shadow: 2px 2px black;
+
+}
+
+.translated-images{
+  font-size: 24px;
+  text-align: center;
+  background-color: #333333;
+  border-radius: 20px;
+  color: white;
+  text-shadow: 2px 2px black;
+
+}
+
+.form-field {
+  margin-bottom: 20px;
+  font-size: 20px;
+  width: auto;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  
+  margin-bottom: 20px;
+}
+
+
+.button {
+  position: relative;
+  background-color: #4CAF50;
+  border: none;
+  font-size: 24px;
+  color: #FFFFFF;
+  padding: 10px;
+  width: 120px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 10px;
+  text-shadow: 1px 1px black;
+
+}
+
