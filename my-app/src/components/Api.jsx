@@ -1,38 +1,37 @@
 const apiURL = process.env.REACT_APP_API_URL;
 const apiKey = process.env.REACT_APP_API_KEY;
 
-
-
-export const handleTranslate = async (inputText, hardcodedUsername) => {
-  try {
-    const response = await fetch(`${apiURL}/translations?username=${hardcodedUsername}`, {
-      method: 'POST',
-      headers: {
-        'X-API-Key': apiKey,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: hardcodedUsername,
-        translations: [inputText],
-      }),
-    });
-
-    if (response.ok) {
-      const translatedData = await response.json();
-      return translatedData.translations[0];
-    } else {
-      console.error('Translation failed');
+  export const handleTranslate = async (inputText, localUsername) => {
+    try {
+      const response = await fetch(`${apiURL}/translations?username=${localUsername}`, {
+        method: 'POST',
+        headers: {
+          'X-API-Key': apiKey,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: localUsername,
+          translations: [inputText],
+        }),
+      });
+  
+      if (response.ok) {
+        const translatedData = await response.json();
+        return translatedData.translations[0];
+      } else {
+        console.error('Translation failed');
+        return '';
+      }
+    } catch (error) {
+      console.error('Error:', error);
       return '';
     }
-  } catch (error) {
-    console.error('Error:', error);
-    return '';
-  }
-};
+  };
+  
 
-export const fetchLastTenTranslations = async (userName) => {
+export const fetchLastTenTranslations = async (localusername) => {
   try {
-    const response = await fetch(`${apiURL}/translations?username=${userName}`, {
+    const response = await fetch(`${apiURL}/translations?username=${localusername}`, {
       method: 'GET',
       headers: {
         'X-API-Key': apiKey,
@@ -54,9 +53,9 @@ export const fetchLastTenTranslations = async (userName) => {
   }
 };
 
-export const handleClearTranslations = async (userName) => {
+export const handleClearTranslations = async (localusername) => {
   try {
-    const userResponse = await fetch(`${apiURL}/translations?username=${userName}`, {
+    const userResponse = await fetch(`${apiURL}/translations?username=${localusername}`, {
       method: 'GET',
       headers: {
         'X-API-Key': apiKey,
@@ -66,7 +65,7 @@ export const handleClearTranslations = async (userName) => {
 
     if (userResponse.ok) {
       const userData = await userResponse.json();
-      const user = userData.find(user => user.username === userName);
+      const user = userData.find(user => user.username === localusername);
       
       if (user) {
         const userId = user.id;

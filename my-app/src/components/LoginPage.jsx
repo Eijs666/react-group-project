@@ -2,8 +2,6 @@ import './LoginPage.css';
 import React, { useState } from "react"
 import { GetUserApi } from './Api';  
 import { useNavigate } from 'react-router-dom';
-import TranslationPage from './TranslationPage';
-import Register from './Register';  
 
 
 function LoginPage() {
