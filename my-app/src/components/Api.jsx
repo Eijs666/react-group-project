@@ -1,4 +1,5 @@
-
+const apiURL = process.env.REACT_APP_API_URL;
+const apiKey = process.env.REACT_APP_API_KEY;
 
 //201 Create User - Post a user to json server
 export const RegisterUserApi = (username, password) => {
