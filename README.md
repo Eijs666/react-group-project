@@ -11,10 +11,10 @@ This application translates English text to American Sign Language and provides 
 4. npm start
 
 # React features
-Home page: Allows users to log in by entering their username and password.
-Translation Page: Lets the user input a text and then translates it into ASL.
-Profile Page: Displays last 10 translations for the logged-in user.
-Register Page: Register a new user.
+- Home page: Allows users to log in by entering their username and password.
+- Translation Page: Lets the user input a text and then translates it into ASL.
+- Profile Page: Displays last 10 translations for the logged-in user.
+- Register Page: Register a new user.
 
 # Technologies 
 - React.js
