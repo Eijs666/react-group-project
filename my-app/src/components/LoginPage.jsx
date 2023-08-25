@@ -1,10 +1,7 @@
 import './LoginPage.css';
 import React, { useState } from "react"
-import { GetUserApi } from './Api';
-import Register from './Register';
-import TranlationPage from "./TranslationPage";
+import { GetUserApi } from './Api';  
 import { useNavigate } from 'react-router-dom';
-import TranslationPage from './TranslationPage';
 
 
 function LoginPage() {
@@ -12,7 +9,7 @@ function LoginPage() {
   const [username, setUsername] = useState(""); //{"Value"} fra slides
   const [password, setPassword] = useState(""); //{"Value"} fra slides
   const [fetchedUsername, setFetchedUsername] = useState(""); // Ny state for fetched brugernavn
-  const [isLoading, setIsLoading] = useState(false); // Ny state for fetched brugernavn
+  const [isLoading, setIsLoading] = useState(false); // Add a loading state
 
   const handleUsernameInput = (event) => {
     setUsername(event.target.value);
@@ -35,12 +32,12 @@ function LoginPage() {
   //Get user with api
   function handleLogin(event) {
     event.preventDefault(); //Make sure form html does not interrupt api
+    setIsLoading(true); 
     
-    setIsLoading(true); //loading true before api call
-
     GetUserApi(username)
       .then(users => {
-        setIsLoading(false); //loading false after api call
+
+        setIsLoading(false);
 
         console.log(users)
         if (users.length > 0) {
@@ -53,10 +50,10 @@ function LoginPage() {
             //Save user in logcal storage - session
             localStorage.setItem("username", user.username);
             
-            GoToRegister("/translation")
+           // GoToRegister("/translation");
             console.log(GoToRegister("/translation"));
             console.log({username} + " logged in🎉")
-            alert("🎉U r log inn )!🎉");
+            nav("/translation"); //Go to translation page
             
             //Redirect to Translation page
           }else{
@@ -67,7 +64,7 @@ function LoginPage() {
         }
       })
       .catch(error => {
-        setIsLoading(false); 
+        setIsLoading(false);
         console.log(error);
       });
 
@@ -101,13 +98,12 @@ function LoginPage() {
           <input type="text" placeholder='Password' name="password" className="form-field" value={password} onChange={handlePasswordInput}></input>
         </div>
 
-        <button onClick={handleLogin} className='Button'> 
+        <button onClick={handleLogin} className='Button'>
         {isLoading ? (
             <div className="lds-dual-ring"></div> // Show spinner when loading
           ) : (
-            "Login" //Login text
-          )
-        }
+            "Login" // Show "Login" text when not loading
+          )}
         </button>
       </form>
 
