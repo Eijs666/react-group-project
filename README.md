@@ -8,7 +8,8 @@ This application translates English text to American Sign Language and provides 
 1. git clone https://github.com/Eijs666/react-group-project/tree/main/
 2. cd my-app
 3. npm install
-4. npm start
+4. npm install react-router-dom
+5. npm start
 
 # React features
 - Home page: Allows users to log in by entering their username and password.
