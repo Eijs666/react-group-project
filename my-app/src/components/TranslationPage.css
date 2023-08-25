@@ -1,11 +1,11 @@
 
-#Navigationbar{
+#title{
   
   background: #BDFF68;
   border-radius: 10px;
 }
 
-.login-container{
+.translate-container{
   font-size: 24px;
   text-align: center;
   background-color: #575757;
@@ -15,9 +15,19 @@
 
 }
 
+.translated-images{
+  font-size: 24px;
+  text-align: center;
+  background-color: #333333;
+  border-radius: 20px;
+  color: white;
+  text-shadow: 2px 2px black;
+
+}
 
 .form-field {
   margin-bottom: 20px;
+  font-size: 20px;
   width: auto;
   padding: 8px;
   border: 1px solid #ccc;
@@ -27,7 +37,7 @@
 }
 
 
-.Button {
+.button {
   position: relative;
   background-color: #4CAF50;
   border: none;
@@ -47,29 +57,4 @@
 }
 button:hover{
   background-color: green;
-}
-
-.lds-dual-ring {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-}
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 48px;
-  height: 48px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }

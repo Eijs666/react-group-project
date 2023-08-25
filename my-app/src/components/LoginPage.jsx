@@ -1,19 +1,20 @@
 import './LoginPage.css';
 import React, { useState } from "react"
 import { GetUserApi } from './Api';
-import Register from './Register';
-import TranlationPage from "./TranslationPage";
 import { useNavigate } from 'react-router-dom';
 import TranslationPage from './TranslationPage';
+import Register from './Register';
+import { useEffect } from 'react';
 
 
 function LoginPage() {
 
-  const [username, setUsername] = useState(""); //{"Value"} fra slides
-  const [password, setPassword] = useState(""); //{"Value"} fra slides
-  const [fetchedUsername, setFetchedUsername] = useState(""); // Ny state for fetched brugernavn
-  const [isLoading, setIsLoading] = useState(false); // Ny state for fetched brugernavn
+  const [username, setUsername] = useState(""); //{"Value"} from slides
+  const [password, setPassword] = useState(""); //{"Value"} from slides
+  const [fetchedUsername, setFetchedUsername] = useState(""); // New state for fetched brugernavn
+  const [isLoading, setIsLoading] = useState(false); // Loadin state for logging in
 
+  //Handle user input - username / password
   const handleUsernameInput = (event) => {
     setUsername(event.target.value);
   }
@@ -21,58 +22,76 @@ function LoginPage() {
     setPassword(event.target.value);
   }
 
+  //To navigate around pages
   const nav = useNavigate();
 
   //When click Register button - usenavigate to /register
-  // "page" param - to reuse same method for multiple pages
+  // "page" parameter - to reuse same method for multiple pages
   const GoToRegister = (page) => {
-    return () =>{
+    return () => {
       nav(page);
     }
   }
-  
 
-  //Get user with api
+  //Check if a session is already running
+  const SessionChecker = () => {
+    const username = localStorage.getItem("username");
+
+    //User not exist - go to homepage - else go to translation page
+    if (!username) {
+      console.log("No user found - no session - create user");
+
+    } else {
+      nav("/translation");
+      console.log("Sesssion is running. User: " + { username });
+    }
+
+  }
+
+  // Run once mounted 
+  useEffect(() => {
+    SessionChecker();
+  }, []);
+
+
+  //Get user with api calls
   function handleLogin(event) {
     event.preventDefault(); //Make sure form html does not interrupt api
-    
-    setIsLoading(true); //loading true before api call
+    setIsLoading(true);
 
     GetUserApi(username)
       .then(users => {
-        setIsLoading(false); //loading false after api call
 
-        console.log(users)
+        setIsLoading(false); //Loading symbol not dispalyed
+
+        //Get first user foound
         if (users.length > 0) {
           const user = users[0];
 
-          if(user.password === password){
+          if (user.password === password) {
 
             setFetchedUsername(user.username);
-            
+
             //Save user in logcal storage - session
             localStorage.setItem("username", user.username);
-            
-            GoToRegister("/translation")
-            console.log(GoToRegister("/translation"));
-            console.log({username} + " logged in🎉")
-            alert("🎉U r log inn )!🎉");
-            
+
+            // GoToRegister("/translation");
+            console.log({ username } + " logged in🎉")
+            nav("/translation"); //Go to translation page
+
             //Redirect to Translation page
-          }else{
+          } else {
             alert("❌Wrong password, Try again!❌");
           }
-        }else{
-          alert("❌User not found - Register User instead!❌");
+        } else {
+          alert("❌User not found - Register user instead!❌");
         }
       })
       .catch(error => {
-        setIsLoading(false); 
+        setIsLoading(false);
         console.log(error);
       });
 
-    console.log("Username: ", username);
-    console.log("Password: ", password);
   }
 
   return (
@@ -86,7 +105,7 @@ function LoginPage() {
 
 
       <form className='input-field'>
-      <hr width="20%" color='black'></hr>
+        <hr width="20%" color='black'></hr>
 
         <h1>Home Page</h1>
         {fetchedUsername && <h1>{fetchedUsername}</h1>}
@@ -101,13 +120,12 @@ function LoginPage() {
           <input type="text" placeholder='Password' name="password" className="form-field" value={password} onChange={handlePasswordInput}></input>
         </div>
 
-        <button onClick={handleLogin} className='Button'> 
-        {isLoading ? (
+        <button onClick={handleLogin} className='Button'>
+          {isLoading ? (
             <div className="lds-dual-ring"></div> // Show spinner when loading
           ) : (
-            "Login" //Login text
-          )
-        }
+            "Login" // Show "Login" text when not loading
+          )}
         </button>
       </form>
 
