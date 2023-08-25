@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import Register from "./components/Register";
 import TranslationPage from "./components/TranslationPage";
 import ProfilePage from './components/ProfilePage';
 import "./App.css"
+import { TranslationsProvider } from './components/Context';
 
 function App() {
   return (
@@ -19,16 +20,20 @@ function App() {
             <li><NavLink to="/register">Register</NavLink></li>
           </ul>
         </nav>
-       
+       <TranslationsProvider>
 
         <Routes>
           <Route path="/" element={<LoginPage />} />
+
           <Route path="/translation" element={<TranslationPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          
           <Route path="/register" element={<Register/>} />
 
         
         </Routes>
+        
+       </TranslationsProvider>
       </div>
     </Router>
   );
